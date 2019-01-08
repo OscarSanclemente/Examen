@@ -1,6 +1,7 @@
 package es.salesianos.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.salesianos.model.Actor;
+import es.salesianos.model.Director;
+import es.salesianos.model.Pelicula;
 import es.salesianos.service.Service;
 import es.salesianos.service.Service;
 
@@ -21,15 +24,28 @@ public class DirectorServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String name = req.getParameter("name");
+		Director director = new Director();
+		director.setNombre(name);
+		service.insert(director);
 		doAction(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String codString = req.getParameter("cod");
+		if(null != codString) {
+			Director director = new Director();
+			int cod = Integer.parseInt(codString);
+			director.setCod(cod);
+			service.delete(director);
+		}
 		doAction(req, resp);
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		List<Director> listAllDirectores = service.selectAllDirector();
+		req.setAttribute("listAllDirectores", listAllDirectores);
 		redirect(req, resp);
 	}
 

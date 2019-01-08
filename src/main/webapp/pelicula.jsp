@@ -44,5 +44,7 @@ List<Pelicula> listAllPeliculas = (List<Pelicula>)request.getAttribute("listAllP
 		</c:forEach>
 	</tbody>
 </table>
+
+<a href="/index.jsp">Volver a la página de inicio</a>
 </body>
 </html>
