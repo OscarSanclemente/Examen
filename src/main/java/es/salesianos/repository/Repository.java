@@ -45,10 +45,9 @@ public class Repository {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conn
-					.prepareStatement("INSERT INTO Pelicula (cod, title, codOwner)" + "VALUES (?, ?, ?)");
-			preparedStatement.setInt(1, pelicula.getCod());
-			preparedStatement.setString(2, pelicula.getTitle());
-			preparedStatement.setInt(3, pelicula.getCodDirector());
+					.prepareStatement("INSERT INTO FILM (tittle, codOwner)" + "VALUES (?, ?)");
+			preparedStatement.setString(1, pelicula.getTitle());
+			preparedStatement.setInt(2, pelicula.getCodDirector());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,7 +101,7 @@ public class Repository {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conn
-					.prepareStatement("DELETE FROM PELICULA WHERE cod=?");
+					.prepareStatement("DELETE FROM FILM WHERE cod=?");
 			preparedStatement.setInt(1, actor.getCod());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -191,14 +190,14 @@ public class Repository {
 		List<Pelicula> list = new ArrayList<Pelicula>();
 		try {
 			preparedStatement = conn
-					.prepareStatement("SELECT * FROM PELICULA");
+					.prepareStatement("SELECT * FROM FILM");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Pelicula director = new Pelicula();
-				director.setCod(resultSet.getInt(0));
-				director.setTitle(resultSet.getString(1));
-				director.setCodDirector(resultSet.getInt(2));
-				list.add(director);
+				Pelicula pelicula = new Pelicula();
+				pelicula.setCod(resultSet.getInt(1));
+				pelicula.setTitle(resultSet.getString(2));
+				pelicula.setCodDirector(resultSet.getInt(3));
+				list.add(pelicula);
 			}
 			
 		} catch (SQLException e) {

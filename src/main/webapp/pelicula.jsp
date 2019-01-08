@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,es.salesianos.model.*" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +16,6 @@
 List<Pelicula> listAllPeliculas = (List<Pelicula>)request.getAttribute("listAllPeliculas");
 %>
 	<form action="/pelicula" method="post">
-		<span>cod:</span> <input type="text" name="cod"> <br />
 		<span>title:</span> <input type="text" name="title"> <br />
 		<span>codDirector:</span> <input type="text" name="codDirector"> <br />
 		<input type="submit">
@@ -29,7 +30,7 @@ List<Pelicula> listAllPeliculas = (List<Pelicula>)request.getAttribute("listAllP
 			<td>Cod</td>
 			<td>Title</td>
 			<td>codDirector</td>
-			<td>Editar</td>
+			<td>Eliminar</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -37,8 +38,8 @@ List<Pelicula> listAllPeliculas = (List<Pelicula>)request.getAttribute("listAllP
 			<tr>
 				<td><c:out value="${peli.cod}"/> </td>
 				<td><c:out value="${peli.title}"/> </td>
-				<td><c:out value="${peli.codOwner}"/> </td>
-				<td><a href="/pelicula?cod=${peli.cod}">EDIT</a> </td>
+				<td><c:out value="${peli.codDirector}"/> </td>
+				<td><a href="/pelicula?cod=${peli.cod}">Eliminar</a> </td>
 	    	</tr>
 		</c:forEach>
 	</tbody>
