@@ -19,7 +19,12 @@ public class FilmService {
 		
 	}
 	
-	public void deleteFilm(Film film) {
+	public void deleteFilm(String codString) {
+		
+		Film film = new Film();
+		int cod = Integer.parseInt(codString);
+		film.setCod(cod);
+		
 		repository.deleteFilm(film);
 		
 	}

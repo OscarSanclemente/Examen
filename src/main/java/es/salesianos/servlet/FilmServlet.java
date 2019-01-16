@@ -34,10 +34,11 @@ public class FilmServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Film film = filmAssembler.assembleActorfrom(req);
 
-		if(null != film.getCod()) {
-			service.deleteFilm(film);
+		String codString = req.getParameter("cod");
+		
+		if(null != codString) {
+			service.deleteFilm(codString);
 		}
 		doAction(req, resp);
 	}

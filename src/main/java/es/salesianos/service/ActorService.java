@@ -19,7 +19,12 @@ public class ActorService {
 
 	}
 	
-	public void delete(Actor actor) {
+	public void delete(String codString) {
+		
+		Actor actor = new Actor();
+		int cod = Integer.parseInt(codString);
+		actor.setCod(cod);
+		
 		repository.deleteActor(actor);
 
 	}

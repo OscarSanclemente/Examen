@@ -30,10 +30,11 @@ public class ActorServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Actor actor = actorAssembler.assembleActorfrom(req);
+
+		String codString = req.getParameter("cod");
 		
-		if(null != actor.getCod()) {
-			service.delete(actor);
+		if(null != codString) {
+			service.delete(codString);
 		}
 		doAction(req, resp);
 	}
