@@ -13,9 +13,9 @@
 <body>
 
 <%
-List<Pelicula> listAllPeliculas = (List<Pelicula>)request.getAttribute("listAllPeliculas");
+	List<Film> listAllFilms = (List<Film>)request.getAttribute("listAllFilms");
 %>
-	<form action="/pelicula" method="post">
+	<form action="/film" method="post">
 		<span>title:</span> <input type="text" name="title"> <br />
 		<span>codDirector:</span> <input type="text" name="codDirector"> <br />
 		<input type="submit">
@@ -34,12 +34,12 @@ List<Pelicula> listAllPeliculas = (List<Pelicula>)request.getAttribute("listAllP
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="peli" items="${listAllPeliculas}">
+		<c:forEach var="film" items="${listAllFilms}">
 			<tr>
-				<td><c:out value="${peli.cod}"/> </td>
-				<td><c:out value="${peli.title}"/> </td>
-				<td><c:out value="${peli.codDirector}"/> </td>
-				<td><a href="/pelicula?cod=${peli.cod}">Eliminar</a> </td>
+				<td><c:out value="${film.cod}"/> </td>
+				<td><c:out value="${film.title}"/> </td>
+				<td><c:out value="${film.codDirector}"/> </td>
+				<td><a href="/film?cod=${film.cod}">Eliminar</a> </td>
 	    	</tr>
 		</c:forEach>
 	</tbody>

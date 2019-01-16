@@ -28,7 +28,7 @@
 		<c:forEach var="director" items="${listAllDirectores}">
 			<tr>
 				<td><c:out value="${director.cod}"/> </td>
-				<td><c:out value="${director.nombre}"/> </td>
+				<td><c:out value="${director.name}"/> </td>
 				<td><a href="/director?cod=${director.cod}">Eliminar</a> </td>
 	    	</tr>
 		</c:forEach>

@@ -7,7 +7,7 @@
 <title>Index page</title>
 </head>
 <body>
-	<a href="/pelicula">Peliculas</a>
+	<a href="/film">Peliculas</a>
 	<a href="/director">Directores</a>
 	<a href="/actor">Actores</a>
 </body>

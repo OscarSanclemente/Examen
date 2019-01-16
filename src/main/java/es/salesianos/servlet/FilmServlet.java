@@ -9,43 +9,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.salesianos.model.Actor;
-import es.salesianos.model.assembler.ActorAssembler;
-import es.salesianos.service.ActorService;
+import es.salesianos.model.Film;
+import es.salesianos.model.assembler.FilmAssembler;
+import es.salesianos.service.FilmService;
 
-public class ActorServlet extends HttpServlet {
+public class FilmServlet extends HttpServlet {
 
 
 	private static final long serialVersionUID = 1L;
 
-	private ActorService service = new ActorService();
-	private ActorAssembler actorAssembler = new ActorAssembler();
+	private FilmService service = new FilmService();
+	
+	private FilmAssembler filmAssembler = new FilmAssembler();
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
-		Actor actor = actorAssembler.assembleActorfrom(req);
-		service.insert(actor);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Film film = filmAssembler.assembleActorfrom(req);
+		
+		service.insertFilm(film);
 		doAction(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Actor actor = actorAssembler.assembleActorfrom(req);
 		
-		if(null != actor.getCod()) {
-			service.delete(actor);
+		Film film = filmAssembler.assembleActorfrom(req);
+
+		if(null != film.getCod()) {
+			service.deleteFilm(film);
 		}
 		doAction(req, resp);
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		List<Actor> listAllActores = service.selectAllActor();
-		req.setAttribute("listAllActores", listAllActores);
+		List<Film> selectAllFilms = service.selectAllFilms();
+		req.setAttribute("listAllFilms", selectAllFilms);
 		redirect(req, resp);
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/actor.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/film.jsp");
 		dispatcher.forward(req, resp);
 	}
 }
