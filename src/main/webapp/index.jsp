@@ -8,7 +8,11 @@
 </head>
 <body>
 	<a href="/film">Peliculas</a>
+	<br>
 	<a href="/director">Directores</a>
+	<br>
 	<a href="/actor">Actores</a>
+	<br>
+	<a href="/filmActor">Peliculas y sus actores</a>
 </body>
 </html>
