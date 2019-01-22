@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import es.salesianos.model.CacheActor;
 import es.salesianos.model.Director;
 import es.salesianos.model.assembler.CacheActorAssembler;
-import es.salesianos.service.DirectorService;
+import es.salesianos.service.CacheActorService;
 
 public class CacheActorServlet extends HttpServlet {
 
 
 	private static final long serialVersionUID = 1L;
 
-	private DirectorService service = new DirectorService();
+	private CacheActorService service = new CacheActorService();
 	
 	private CacheActorAssembler cacheActorAssembler = new CacheActorAssembler();
 
@@ -27,28 +27,18 @@ public class CacheActorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		CacheActor cacheActor = cacheActorAssembler.assembleCacheActorfrom(req);
-//		service.insert(director);
 		
-		//FALTA HACER EL SERVICE
-		
+		service.insert(cacheActor);
 		
 		doAction(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String codString = req.getParameter("cod");
-		
-		if(null != codString) {
-			service.delete(codString);
-		}
 		doAction(req, resp);
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		List<Director> listAllDirectores = service.selectAllDirector();
-		req.setAttribute("listAllDirectores", listAllDirectores);
 		redirect(req, resp);
 	}
 

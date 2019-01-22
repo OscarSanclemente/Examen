@@ -14,5 +14,7 @@
 	<a href="/actor">Actores</a>
 	<br>
 	<a href="/filmActor">Peliculas y sus actores</a>
+	<br>
+	<a href="/searchBirthDate">Buscador de actores por año</a>
 </body>
 </html>
