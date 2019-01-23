@@ -16,13 +16,11 @@ public class ActorRepository {
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test";
 	AbstractConnection manager = new H2Connection();
 
-
 	public void insertActor(Actor actor) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn
-					.prepareStatement("INSERT INTO ACTOR (name,yearOfBirthDate)" + "VALUES (?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO ACTOR (name,yearOfBirthDate)" + "VALUES (?, ?)");
 			preparedStatement.setString(1, actor.getName());
 			preparedStatement.setInt(2, actor.getYear());
 			preparedStatement.executeUpdate();
@@ -35,13 +33,12 @@ public class ActorRepository {
 		}
 
 	}
-	
+
 	public void deleteActor(Actor actor) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn
-					.prepareStatement("DELETE FROM ACTOR WHERE cod=?");
+			preparedStatement = conn.prepareStatement("DELETE FROM ACTOR WHERE cod=?");
 			preparedStatement.setInt(1, actor.getCod());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -53,14 +50,13 @@ public class ActorRepository {
 		}
 
 	}
-	
+
 	public List<Actor> selectAllActor() {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		List<Actor> list = new ArrayList<Actor>();
 		try {
-			preparedStatement = conn
-					.prepareStatement("SELECT * FROM ACTOR");
+			preparedStatement = conn.prepareStatement("SELECT * FROM ACTOR");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Actor actor = new Actor();
@@ -69,7 +65,7 @@ public class ActorRepository {
 				actor.setYear(resultSet.getInt(3));
 				list.add(actor);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -85,8 +81,7 @@ public class ActorRepository {
 		PreparedStatement preparedStatement = null;
 		List<Actor> list = new ArrayList<Actor>();
 		try {
-			preparedStatement = conn
-					.prepareStatement("SELECT * FROM ACTOR WHERE yearOfBirthDate BETWEEN (?) AND (?)");
+			preparedStatement = conn.prepareStatement("SELECT * FROM ACTOR WHERE yearOfBirthDate BETWEEN (?) AND (?)");
 			preparedStatement.setInt(1, year1);
 			preparedStatement.setInt(2, year2);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -97,7 +92,7 @@ public class ActorRepository {
 				actor.setYear(resultSet.getInt(3));
 				list.add(actor);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -107,5 +102,5 @@ public class ActorRepository {
 		}
 		return list;
 	}
-	
+
 }

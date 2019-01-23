@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.salesianos.model.Actor;
 import es.salesianos.model.CacheActor;
 import es.salesianos.model.Director;
 import es.salesianos.model.assembler.CacheActorAssembler;
@@ -35,6 +36,11 @@ public class CacheActorServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String role = req.getParameter("role");
+		if (role != null) {
+			List<Actor> actor = service.selectActor(role);
+			req.setAttribute("actor", actor);
+		}
 		doAction(req, resp);
 	}
 

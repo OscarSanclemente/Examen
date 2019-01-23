@@ -15,29 +15,27 @@ import es.salesianos.service.FilmService;
 
 public class FilmActorServlet extends HttpServlet {
 
-
 	private static final long serialVersionUID = 1L;
 
 	private FilmService service = new FilmService();
-	
+
 	private FilmAssembler filmAssembler = new FilmAssembler();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		Film film = filmAssembler.assembleActorfrom(req);
-		
+
 		service.insertFilm(film);
 		doAction(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 
 		String codString = req.getParameter("cod");
-		
-		if(null != codString) {
+
+		if (null != codString) {
 			service.deleteFilm(codString);
 		}
 		doAction(req, resp);
