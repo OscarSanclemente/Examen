@@ -37,10 +37,13 @@ public class CacheActorServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String role = req.getParameter("role");
-		if (role != null) {
-			List<Actor> actor = service.selectActor(role);
-			req.setAttribute("actor", actor);
-		}
+//		if (role != null) {
+//			List<Actor> actor = service.selectActor(role);
+//			req.setAttribute("actor", actor);
+//		}
+		
+		FALTA BUSCAR POR PERSONAJE INTERPRETADO(LOS DOS ULTIMOS PUNTOS QUE PEDIA EN EL EXAMEN)
+		
 		doAction(req, resp);
 	}
 

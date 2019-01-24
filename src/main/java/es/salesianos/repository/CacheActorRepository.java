@@ -38,31 +38,31 @@ public class CacheActorRepository {
 
 	}
 	
-	public Actor selectActor(String role){
-		Connection conn = manager.open(jdbcUrl);
-		PreparedStatement preparedStatement = null;
-		List<Actor> list = new ArrayList<Actor>();
-		try {
-			preparedStatement = conn.prepareStatement("SELECT TITTLE, NAME, YEAROFBIRTHDATE" + " FROM ((FILMACTOR"
-					+ " INNER JOIN FILM ON FILM.COD = FILMACTOR.CODFILM)"
-					+ " INNER JOIN ACTOR ON ACTOR.COD = FILMACTOR.CODACTOR)" + " WHERE FILMACTOR.ROLE = (?)");
-			preparedStatement.setString(1, role);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				Actor actor = new Actor();
-				actor.setTitle(resultSet.getString(1));
-				actor.setName(resultSet.getString(2));
-				actor.setYear(resultSet.getInt(3));
-				actor = dtofromDataBase;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			manager.close(preparedStatement);
-			manager.close(conn);
-		}
-		return list;
-	}
+//	public Actor selectActor(String role){
+//		Connection conn = manager.open(jdbcUrl);
+//		PreparedStatement preparedStatement = null;
+//		List<Actor> list = new ArrayList<Actor>();
+//		try {
+//			preparedStatement = conn.prepareStatement("SELECT TITTLE, NAME, YEAROFBIRTHDATE" + " FROM ((FILMACTOR"
+//					+ " INNER JOIN FILM ON FILM.COD = FILMACTOR.CODFILM)"
+//					+ " INNER JOIN ACTOR ON ACTOR.COD = FILMACTOR.CODACTOR)" + " WHERE FILMACTOR.ROLE = (?)");
+//			preparedStatement.setString(1, role);
+//			ResultSet resultSet = preparedStatement.executeQuery();
+//			while (resultSet.next()) {
+//				Actor actor = new Actor();
+//				actor.setTitle(resultSet.getString(1));
+//				actor.setName(resultSet.getString(2));
+//				actor.setYear(resultSet.getInt(3));
+//				actor = dtofromDataBase;
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			throw new RuntimeException(e);
+//		} finally {
+//			manager.close(preparedStatement);
+//			manager.close(conn);
+//		}
+//		return list;
+//	}
 }
