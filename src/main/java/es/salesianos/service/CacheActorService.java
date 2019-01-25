@@ -1,19 +1,18 @@
 package es.salesianos.service;
 
-import es.salesianos.model.CacheActor;
-import es.salesianos.repository.CacheActorRepository;
+import es.salesianos.model.DtoActorFilm;
+import es.salesianos.model.FilmActor;
+import es.salesianos.repository.FilmActorRepository;
 
 public class CacheActorService {
 
 
-	private CacheActorRepository repository = new CacheActorRepository();
+	private FilmActorRepository repository = new FilmActorRepository();
 	
-	public void insert(CacheActor cacheActor) {
-		repository.insertCacheActor(cacheActor);
+	public void insert(FilmActor filmActor) {
+		repository.insert(filmActor);
 	}
-	
-//	public List<Actor> selectActor(String role){
-//		repository.selectActor(role);
-//	}
-
+	public DtoActorFilm filterAllFilmActor(String role) {
+		return repository.filterAllFilmActor(role);
+	}
 }

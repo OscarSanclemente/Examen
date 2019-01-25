@@ -8,26 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.salesianos.model.FilmActor;
-import es.salesianos.model.assembler.CacheActorAssembler;
+import es.salesianos.model.DtoActorFilm;
 import es.salesianos.service.CacheActorService;
 
-public class CacheActorServlet extends HttpServlet {
-
-
+public class SearchRoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private CacheActorService service = new CacheActorService();
-	
-	private CacheActorAssembler cacheActorAssembler = new CacheActorAssembler();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		FilmActor cacheActor = cacheActorAssembler.assembleFilmActorfrom(req);
-		
-		service.insert(cacheActor);
-		
 		doAction(req, resp);
 	}
 
@@ -37,11 +26,16 @@ public class CacheActorServlet extends HttpServlet {
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		String role = req.getParameter("role");
+		if (role != null) {
+			DtoActorFilm selectFilmActor = service.filterAllFilmActor(role);
+			req.setAttribute("selectFilmActor", selectFilmActor);
+		}
 		redirect(req, resp);
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cacheActor.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchRole.jsp");
 		dispatcher.forward(req, resp);
 	}
-}
+} 

@@ -2,13 +2,12 @@ package es.salesianos.model.assembler;
 
 import javax.servlet.http.HttpServletRequest;
 
-import es.salesianos.model.Actor;
-import es.salesianos.model.CacheActor;
+import es.salesianos.model.FilmActor;
 
 public class CacheActorAssembler {
 
-	public static CacheActor assembleCacheActorfrom(HttpServletRequest req) {
-		CacheActor cacheActor = new CacheActor();
+	public static FilmActor assembleFilmActorfrom(HttpServletRequest req) {
+		FilmActor cacheActor = new FilmActor();
 //		String name = req.getParameter("name");
 //		int year = Integer.parseInt(req.getParameter("year"));
 //		actor.setName(name);
