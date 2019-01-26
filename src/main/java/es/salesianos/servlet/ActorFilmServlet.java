@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.salesianos.model.Actor;
 import es.salesianos.model.Film;
 import es.salesianos.model.assembler.ActorAssembler;
+import es.salesianos.repository.ActorRepository;
 import es.salesianos.service.ActorService;
 
 public class ActorFilmServlet extends HttpServlet {
@@ -23,11 +27,14 @@ public class ActorFilmServlet extends HttpServlet {
 	
 	private ActorAssembler actorAssembler = new ActorAssembler();
 
+	private static final Logger log = LogManager.getLogger(ActorFilmServlet.class);
+
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		Actor actor = actorAssembler.assembleActorfrom(req);
-		
+
 		service.insert(actor);
 		doAction(req, resp);
 	}
@@ -37,6 +44,8 @@ public class ActorFilmServlet extends HttpServlet {
 		
 
 		String codString = req.getParameter("cod");
+		
+		log.info("Valor del parametro COD -> "+codString);
 		
 		if(null != codString) {
 			service.delete(codString);

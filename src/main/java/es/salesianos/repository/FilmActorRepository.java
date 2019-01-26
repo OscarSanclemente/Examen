@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.salesianos.connection.AbstractConnection;
 import es.salesianos.connection.H2Connection;
 import es.salesianos.model.ActorFilmDto;
@@ -14,19 +17,22 @@ public class FilmActorRepository {
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test";
 	AbstractConnection manager = new H2Connection();
+	
+	private static final Logger log = LogManager.getLogger(FilmActorRepository.class);
 
 	public void insert(FilmActor filmActor) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conn
-					.prepareStatement("INSERT INTO FILMACTOR (cache, role, codActor, codFilm)" + "VALUES (?, ?, ?, ?)");
+					.prepareStatement("INSERT INTO FILMACTOR (cache, role, codActor, codFilm) VALUES (?, ?, ?, ?)");
 			preparedStatement.setInt(1, filmActor.getCache());
 			preparedStatement.setString(2, filmActor.getRole());
 			preparedStatement.setInt(3, filmActor.getCodActor());
 			preparedStatement.setInt(4, filmActor.getCodFilm());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
+			log.error("Error a la hora de insertar un personaje "+e);
 			throw new RuntimeException(e);
 		} finally {
 			manager.close(preparedStatement);
@@ -39,9 +45,9 @@ public class FilmActorRepository {
 		PreparedStatement preparedStatement = null;
 		ActorFilmDto dto = null;
 		try {
-			preparedStatement = conn.prepareStatement("SELECT TITTLE, NAME, YEAROFBIRTHDATE" + " FROM ((FILMACTOR"
+			preparedStatement = conn.prepareStatement("SELECT TITTLE, NAME, YEAROFBIRTHDATE  FROM ((FILMACTOR"
 					+ " INNER JOIN FILM ON FILM.COD = FILMACTOR.CODFILM)"
-					+ " INNER JOIN ACTOR ON ACTOR.COD = FILMACTOR.CODACTOR)" + " WHERE FILMACTOR.ROLE = (?)");
+					+ " INNER JOIN ACTOR ON ACTOR.COD = FILMACTOR.CODACTOR) WHERE FILMACTOR.ROLE = (?)");
 			preparedStatement.setString(1, role);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -52,6 +58,7 @@ public class FilmActorRepository {
 				dto = dtofromDataBase;
 			}
 		} catch (SQLException e) {
+			log.error("Error a la hora de filtrar por actor "+e);
 			throw new RuntimeException(e);
 		} finally {
 			manager.close(preparedStatement);
