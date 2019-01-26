@@ -13,7 +13,7 @@
 <body>
 
 	<%
-	DtoActorFilm selectFilmActor = (DtoActorFilm)request.getAttribute("selectFilmActor");
+		ActorFilmDto selectFilmActor = (ActorFilmDto)request.getAttribute("selectFilmActor");
 	%>
 
 	<form action="/searchRole" method="post">

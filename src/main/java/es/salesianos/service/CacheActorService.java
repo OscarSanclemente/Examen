@@ -1,6 +1,6 @@
 package es.salesianos.service;
 
-import es.salesianos.model.DtoActorFilm;
+import es.salesianos.model.ActorFilmDto;
 import es.salesianos.model.FilmActor;
 import es.salesianos.repository.FilmActorRepository;
 
@@ -12,7 +12,7 @@ public class CacheActorService {
 	public void insert(FilmActor filmActor) {
 		repository.insert(filmActor);
 	}
-	public DtoActorFilm filterAllFilmActor(String role) {
+	public ActorFilmDto filterAllFilmActor(String role) {
 		return repository.filterAllFilmActor(role);
 	}
 }

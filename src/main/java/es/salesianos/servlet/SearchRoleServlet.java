@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.salesianos.model.DtoActorFilm;
+import es.salesianos.model.ActorFilmDto;
 import es.salesianos.service.CacheActorService;
 
 public class SearchRoleServlet extends HttpServlet {
@@ -28,7 +28,7 @@ public class SearchRoleServlet extends HttpServlet {
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String role = req.getParameter("role");
 		if (role != null) {
-			DtoActorFilm selectFilmActor = service.filterAllFilmActor(role);
+			ActorFilmDto selectFilmActor = service.filterAllFilmActor(role);
 			req.setAttribute("selectFilmActor", selectFilmActor);
 		}
 		redirect(req, resp);
