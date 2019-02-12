@@ -11,7 +11,7 @@
 <title>Index page</title>
 </head>
 <body>
-	<form action="/actor" method="post">
+	<form action="addActor" method="post" modelAttribute="actor">
 		<span>name:</span> <input type="text" name="name"> <br /> <span>year:</span>
 		<input type="text" name="year"> <br /> <input type="submit">
 	</form>

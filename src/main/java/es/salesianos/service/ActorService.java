@@ -2,13 +2,17 @@ package es.salesianos.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import es.salesianos.model.Actor;
 import es.salesianos.repository.ActorRepository;
 
+@Service("actorService")
 public class ActorService {
-
-
-	private ActorRepository repository = new ActorRepository();
+	
+	@Autowired
+	private ActorRepository repository;
 
 	public List<Actor> selectAllActor() {
 			return repository.selectAllActor();

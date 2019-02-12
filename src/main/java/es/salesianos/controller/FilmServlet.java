@@ -1,4 +1,4 @@
-package es.salesianos.servlet;
+package es.salesianos.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,29 +13,31 @@ import es.salesianos.model.Film;
 import es.salesianos.model.assembler.FilmAssembler;
 import es.salesianos.service.FilmService;
 
-public class FilmActorServlet extends HttpServlet {
+public class FilmServlet extends HttpServlet {
+
 
 	private static final long serialVersionUID = 1L;
 
 	private FilmService service = new FilmService();
-
+	
 	private FilmAssembler filmAssembler = new FilmAssembler();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		Film film = filmAssembler.assembleActorfrom(req);
-
+		
 		service.insertFilm(film);
 		doAction(req, resp);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 
 		String codString = req.getParameter("cod");
-
-		if (null != codString) {
+		
+		if(null != codString) {
 			service.deleteFilm(codString);
 		}
 		doAction(req, resp);
@@ -48,7 +50,7 @@ public class FilmActorServlet extends HttpServlet {
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/filmActor.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/film.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

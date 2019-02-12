@@ -2,13 +2,17 @@ package es.salesianos.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import es.salesianos.model.Film;
 import es.salesianos.repository.FilmRepository;
 
+@Service("filmService")
 public class FilmService {
 
-
-	private FilmRepository repository = new FilmRepository();
+	@Autowired
+	private FilmRepository repository;
 
 	public List<Film> selectAllFilms() {
 		return repository.selectAllFilms();

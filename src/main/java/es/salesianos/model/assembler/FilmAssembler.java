@@ -2,8 +2,11 @@ package es.salesianos.model.assembler;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Component;
+
 import es.salesianos.model.Film;
 
+@Component
 public class FilmAssembler {
 
 	public static Film assembleActorfrom(HttpServletRequest req) {
