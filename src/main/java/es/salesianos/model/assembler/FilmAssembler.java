@@ -1,7 +1,5 @@
 package es.salesianos.model.assembler;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Component;
 
 import es.salesianos.model.Film;
@@ -9,13 +7,10 @@ import es.salesianos.model.Film;
 @Component
 public class FilmAssembler {
 
-	public static Film assembleActorfrom(HttpServletRequest req) {
+	public static Film assembleActorfrom(String title, Integer codDirector) {
 
 		Film film = new Film();
 		
-		String title = req.getParameter("title");
-		String codDirectorString = req.getParameter("codDirector");
-		int codDirector = Integer.parseInt(codDirectorString);
 		film.setCodDirector(codDirector);
 		film.setTitle(title);
 		

@@ -1,7 +1,5 @@
 package es.salesianos.model.assembler;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Component;
 
 import es.salesianos.model.Director;
@@ -9,15 +7,13 @@ import es.salesianos.model.Director;
 @Component
 public class DirectorAssembler {
 
-	public static Director assembleDirectorfrom(HttpServletRequest req) {
+	public static Director assembleDirectorfrom(Integer codDirector, String name) {
 		
 		Director director = new Director();
 		
-		String codDirector = req.getParameter("cod");
 		if(null != codDirector) {
-			director.setCod(Integer.parseInt(codDirector));
+			director.setCod(codDirector);
 		}
-		String name = req.getParameter("name");
 		director.setName(name);
 		
 		return director;

@@ -1,6 +1,6 @@
 package es.salesianos.model;
 
-public class ActorFilmDto {
+public class DtoActorFilm {
 	private String title;
 	private String name;
 	private int year;

@@ -29,5 +29,9 @@ public class DirectorService {
 		director.setCod(cod);
 		repository.deleteDirector(director);
 	}
+	
+	public Director filterAllDirector(String name) {
+		return repository.filterAllDirector(name);
+	}
 
 }
